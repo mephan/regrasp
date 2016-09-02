@@ -10,7 +10,8 @@ background-color:  #c0c0c0;
 }
 
 #repetitions{
-display:"";
+display:"fixed";
+left: 15%;
 }
 
 #objectSetup,#firstDiagram{
@@ -38,10 +39,12 @@ display:table;
 color:#59595B;
 font-family:"Monserat";
 font-size:36pt;
-} 
+}
 
 #scoreResponse{
-display:none;
+position: fixed;
+left: 40%;
+text-align: center;
 }
 
 #diagram{
@@ -58,11 +61,16 @@ width:85%;
 }
 
 #scoreValue{
-font-size:60pt;
+position: fixed;
+left: 30%;
+top: 40%;
+font-size:40pt;
 text-align: center; /*changed*/
 }
-
 #resetObjects{
+position: fixed;
+left: 25%;
+top: 65%;
 font-size:30pt;
 text-align: center; /*changed*/
 }
@@ -105,7 +113,7 @@ display:table;
 margin-top:auto;
 margin-bottom:auto;
 text-align: center;
-height:100%;	
+height:100%;
 width:15%;
 background-color:#f3284e;
 float:left;
@@ -316,7 +324,7 @@ margin:auto;
 margin-top:100px;
 }
 
-#objects_wrapper, 
+#objects_wrapper,
 #firstSetup_wrapper {
 width:100%;
 position: absolute;
@@ -335,7 +343,7 @@ z-index:12;
 
 }
 #popupBoxOnePosition{
-top: 0; left: 0; position: fixed; width: 100%; height: 100%; 
+top: 0; left: 0; position: fixed; width: 100%; height: 100%;
 background-color: rgba(0,0,0,0.7); display: none;
 }
 .popupBoxWrapper{
@@ -423,7 +431,7 @@ color:#FFFFFF;
 }
 #flower5{
 	left:40%;
-	
+
 }
 #key{
 	display:none;

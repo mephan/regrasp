@@ -4,7 +4,7 @@ window.onload=function(){
 						"Another flower has appeared in your garden. </br>Continue on to the next exercise.",
 						"Another flower has appeared in your garden. </br>Continue on to the next exercise.",
 						"Look at how much your garden has grown today. </br>Click to exit and have a nice day!"
-						
+
 						]
 	var setupTime=6000;
 	var maxErrors=5;
@@ -23,7 +23,7 @@ window.onload=function(){
 	var taskArea=document.getElementById("taskArea");
 	var objectSetup=document.getElementById("objectSetup");
 	var firstDiagram=document.getElementById("firstDiagram");
-	var popup=document.getElementById("popupBoxOnePosition");	
+	var popup=document.getElementById("popupBoxOnePosition");
 	var socket=io();
 	var scores=[];
 	var count=3;
@@ -53,7 +53,7 @@ window.onload=function(){
 	var setup=false;
 	highlightObject();
 	var attempt=0;
-	
+
 	function systemSetup(){
 		console.log("systemSetup");
 		showReps();
@@ -105,9 +105,25 @@ window.onload=function(){
 	}
 	function showReps(){
 		console.log("showReps");
-		document.getElementById("repetitions").style.display="block";
-		document.getElementById("prep").style.display="";
-		document.getElementById("scoreResponse").style.display="none";
+		$("#scoreImage").css('visibility', 'visible');
+		$("#scoreImage").css('position', 'fixed');
+		$("#scoreImage").css('left', '6%');
+		$("#scoreImage").css('top', '25%');
+		$("#scoreImage").css('opacity', '0.4');
+		$("#scoreImage").css('width', '77%');
+		$("#scoreImage").css('height', '77%');
+
+		$("#repetitions").css("visibility", "visible");
+		$("#repetitions").css("position", "fixed");
+		$("#repetitions").css("left", "35%");
+
+
+	  $("#prep").css('visibility', 'visible');
+		$('#prep').css('position', 'fixed');
+		$('#prep').css('top', '10%');
+		$('#prep').css('left', '2%');
+
+		$("#scoreResponse").css('visibility', 'hidden');
 	}
 	function hideSetup(){
 		console.log("hideSetup");
@@ -189,7 +205,7 @@ window.onload=function(){
 			if(curScore>0){
 				totalScores+=curScore;
 			}
-			
+
 		}
 		avg=Math.round((totalScores*1.0)/total);
 
@@ -215,6 +231,7 @@ window.onload=function(){
 			diagramLayout=false;
 		}
 		else if(diagramOn){
+			$("#scoreResponse").css('visibility', 'hidden');
 			diagramOn=false;
 			objectSetup.style.visibility="hidden";
 			firstDiagram.style.visibility="visible";
@@ -417,17 +434,19 @@ window.onload=function(){
 	function scoreLoadingScreen(){
 		console.log("scoreLoadingScreen");
 		start=true;
-		document.getElementById("repetitions").style.display="none"; //hide repetitions
-		document.getElementById("prep").style.display="none"; //hide prep
-		document.getElementById("scoreResponse").style.display="block";
+		$("#repetitions").css("visibility", "hidden"); //hide repetitions
+	  $("#prep").css('visibility', 'hidden'); //hide prep
+		$("#scoreResponse").css('visibility', 'visible');
+		//$("#scoreResponse").css('position', 'fixed');
+		//$("#scoreResponse").css('left', '50%');
 		document.getElementById("scoreValue").innerHTML="Hold on";
-		document.getElementById("scoreValue").style.left="30%"; //CHANGED //Try this
+		//document.getElementById("scoreValue").style.left="30%"; //CHANGED //Try this
 		document.getElementById("resetObjects").innerHTML="Score is loading.";
 		document.getElementById("centeredPatient").style.width="65%";
 		document.getElementById("taskArea").style.width="65%";
 		document.getElementById("key").style.display="block";
 		document.getElementById("image").style.display="block";
-		document.getElementById("scoreImage").style.display="none" //CHANGED //Gets rid of the scoring circle
+		$("#scoreImage").css('visibility', 'hidden'); //CHANGED //Gets rid of the scoring circle
 		intask.style.backgroundColor='#97e157';
 		intask.style.zIndex="9";
 		pretask.style.visibility="visible";
@@ -464,15 +483,14 @@ window.onload=function(){
 		var video = document.getElementById('videodiag');
 		video.currentTime=0;
 		video.play();
-		popup.style.display="block";	
+		popup.style.display="block";
 	})
 
 	//document.getElementById("exit").onclick=function(){
 	$( '#exit' ).on("tap", function() {
 		console.log("exit.onclick");
 		console.log("");
-		popup.style.display="none";	
+		popup.style.display="none";
 	})
-	
+
 }
-		
