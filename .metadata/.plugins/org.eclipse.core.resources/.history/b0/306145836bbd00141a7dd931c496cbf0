@@ -1,0 +1,42 @@
+import java.net.*;
+import java.util.*;
+import java.io.*;
+ 
+public class ServerMain
+{
+    public static void main(String[] args)
+    {
+        new ServerMain();
+    }
+     
+    public ServerMain() 
+    {
+        //We need a try-catch because lots of errors can be thrown
+        try {
+            ServerSocket sSocket = new ServerSocket(4000);
+            System.out.println("Server started at: " + new Date());
+             
+            //Wait for a client to connect
+            Socket socket = sSocket.accept();
+             
+            //Create the streams
+            PrintWriter output = new PrintWriter(socket.getOutputStream(), true);
+            BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+             
+            //Tell the client that he/she has connected
+            output.println("You have connected at: " + new Date());
+            
+            //Loop that runs server functions
+            while(true) {
+            	//output.write("Hello");
+                //This will wait until a line of text has been sent
+                String chatInput = input.readLine();
+                if(chatInput!=null){
+                	System.out.println(chatInput);
+                }
+            }
+        } catch(IOException exception) {
+            System.out.println("Error: " + exception);
+        }
+    }
+}

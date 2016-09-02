@@ -1,0 +1,61 @@
+1. Syncing: 
+Error 1: Not connected
+Error 2: Case NOT CONNECTED
+
+JSON Request:
+caseConnectRequest="{\"type\" : \"CaseConnected\"}";
+
+JSON Response:
+Success
+caseconnectedResponse="{\"type\" : \"CaseConnection\",\"isConnected\" : true,\"message\" : \"\"}";
+
+Failure
+caseconnectedResponse="{\"type\" : \"CaseConnection\",\"isConnected\" : false,\"message\" : \"Unable to connect case\"}";
+
+
+2. Calibrating
+Error 1: Mat not deployed
+Error 2: Objects not detected
+Error 3: Wrist detected on mat
+
+JSON Request:
+
+calibrationRequest="{\"type\" : \"Calibration\"}";
+
+JSON Response:
+"{\"type\" : \"Calibration\",\"isCalibrated\" : true, \"errors\" : null }"; 
+
+Falure
+calibrationResponse="{\"type\" : \"Calibration\",\"isCalibrated\" : false, 
+					\"errors\" : [{\"error\": \"mat\" , \"message\" : \"Mat not properly deployed\" },
+								  {\"error\": \"objects\" , \"message\" : \"Objects not detected\"}]}";
+
+
+
+
+3. TaskSetup
+Error:Reexamine Case
+Error: Rexamine Objects
+Error: Hand placement
+
+JSON Request:
+
+taskSetupRequest="{\"type\" : \"TaskSetup\"}";
+
+JSON Response:
+
+m
+
+4. TaskComplete
+
+JSON Request:
+
+taskCompleteRequest="{\"type\" : \"TaskComplete\" , \"repetition\" : 1}";
+
+JSON Response:
+
+success
+taskCompleteRequest="{\"type\" : \"TaskComplete\" ,\"success\" : true , \"systemScore\" : 2 , \"doctorScore\" : 4 , \"repetition\" : 1 , \"message\" : null }";
+
+FailuretaskCompleteRequest="{\"type\" : \"TaskComplete\" ,\"success\" : false , \"systemScore\" : -1 , \"doctorScore\" : 4 , \"repetition\" : 1 , \"message\" : \"System was unable to track...\" }";
+

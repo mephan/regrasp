@@ -1,0 +1,32 @@
+html
+  head
+    title=title
+    link(href='/css/style.css', rel='stylesheet')
+    link(href='/css/circle.css', rel='stylesheet')
+    body(margin="auto")
+      div.tabletLayout
+        div#pretask 
+          div#key
+            div.centered
+              img(src="../img/icons-all/key-22.png")
+          div.centeredPatient
+            div#taskArea
+              div.centered
+                span#prep Sit with your back against the chair. Press the green button to continue.
+                div.image       
+                  object#scoreImage(data="../img/icons-all/fullcircle-thirds.svg" ftype="image/svg+xml")  
+                  div.scoreArea
+                    div#repetitions
+                      span#scoreText You have
+                      br
+                      span#count 3
+                      br
+                      more to go!
+                    div#scoreResponse
+                      span#scoreValue Hold on
+                      br
+                      span#resetObjects Score is loading
+          div#start
+            div.centered
+              div.forward
+                img(src="../img/icons-all/forward.png")

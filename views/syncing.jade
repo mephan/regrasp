@@ -1,0 +1,18 @@
+html
+  head
+    title=title
+    script(src='/js/syncing.js')
+    script(src='../socket.io/socket.io.js')
+    link(href='/css/style.css', rel='stylesheet')
+    body(margin="auto")
+      div.tabletLayout
+        div.back
+          a(href="/")
+            img.backIcon(src="../img/icons-all/backicon.png")
+        div.centeredPatient
+            div.centered
+              p Syncing
+        a(href="/beginsetup/")
+          div.nextStep
+            div.centered
+              span Next
