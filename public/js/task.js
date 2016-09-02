@@ -457,20 +457,22 @@ window.onload=function(){
 			socket.emit("json",endTask);
 		}
 	}
-	document.getElementById("video").onclick=function(){
+	//document.getElementById("video").onclick=function(){
+	$( '#video' ).on("tap", function() {
 		console.log("video.onclick");
 		console.log("");
 		var video = document.getElementById('videodiag');
 		video.currentTime=0;
 		video.play();
 		popup.style.display="block";	
-	}
+	})
 
-	document.getElementById("exit").onclick=function(){
+	//document.getElementById("exit").onclick=function(){
+	$( '#exit' ).on("tap", function() {
 		console.log("exit.onclick");
 		console.log("");
 		popup.style.display="none";	
-	}
+	})
 	
 }
 		
