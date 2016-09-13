@@ -6,10 +6,10 @@ window.onload=function(){
 						"Look at how much your garden has grown today. </br>Click to exit and have a nice day!"
 
 						]
-	var setupTime=6000;
+	var setupTime=50; // This should be set to 6000 originally but sped up to 50 for testing
 	var maxErrors=5;
 	var errorCount=0;
-	var scoreTime=6000;
+	var scoreTime=50; // Same deal as above.
 	var checkForErrors=false;
 	var startTask="{\"type\" : \"startTask\", \"task\" : ";
 	var resetTask="{\"type\" : \"resetTask\"}";
@@ -26,8 +26,8 @@ window.onload=function(){
 	var popup=document.getElementById("popupBoxOnePosition");
 	var socket=io();
 	var scores=[];
-	var count=3;
-	var total=3;
+	var count=2; //changed to 2 instead of 3
+	var total=2;
 	var checkForErrors=false;
 	var showGarden=false;
 	var done =false;
@@ -49,6 +49,7 @@ window.onload=function(){
 	var svgCont=svg.contentDocument;
 	var objects=svgCont.getElementsByClassName("ex1");
 	var lastObjects=[];
+	var goodDataRuns = true;
 	lastObjects.push(objects[0]);
 	var setup=false;
 	highlightObject();
@@ -309,8 +310,8 @@ window.onload=function(){
 		}else{
 			done=true;
 			count=total;
-			exercise+=1;
-
+			// Do not change images or videos until you have done the exercise twice good and twice poorly.
+			if (!goodDataRuns) {
 			showGarden=true;
 			highlightObject();
 			updateVideo();
@@ -318,6 +319,10 @@ window.onload=function(){
 			document.getElementById("exerciseTitle").innerHTML="Exercise "+exercise.toString();
 			//showGarden=true;
 			document.getElementById("resetObjects").innerHTML="Task is done.";
+			// increment exercise only after two good runs and two bad runs.
+			exercise+=1;
+			}
+			goodDataRuns = false;
 		}
 		document.getElementById("count").innerHTML=count;
 	}
@@ -426,7 +431,7 @@ window.onload=function(){
 		intask.style.backgroundColor="#e9e9f4";
 		intask.style.color="#59595B";
 		setTimeout(enableEnd,300);
-		document.getElementById("tasktext").innerHTML="Task running. Tap the screen when done";
+		document.getElementById("tasktext").innerHTML="Activity running. Press the screen when done";
 		document.getElementById("centeredTask").style.color="#59595B";
 
 	}

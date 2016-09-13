@@ -43,5 +43,6 @@ exports.gotask=function(req,res){
 exports.endscreen=function(req,res){
 	res.render('endscreen',{title:"Thank you"});
 }
-
-
+exports.survey=function(req, res){
+	res.render('survey', {title:"survey"});
+}

@@ -58,6 +58,7 @@ app.get('/starttask/',routes.starttask);
 app.get('/tasktest/',routes.taskTest);
 app.get('/taskgo/',routes.gotask);
 app.get('/thankyou/',routes.endscreen);
+app.get('/survey/', routes.survey);
 var startTask="{\"type\" : \"startTask\"}";
 var resetTask="{\"type\" : \"resetTask\"}";
 var endTask="{\"type\" : \"endTask\"}";
@@ -100,13 +101,13 @@ io.on('connection', function (socket) {
 		console.log(quit);
 
 	});
-	
-	
-	
+
+
+
 
 });
 /*function myIP(){ var vi="uses java to get the users local ip number"
-    var yip2=java.net.InetAddress.getLocalHost();	
+    var yip2=java.net.InetAddress.getLocalHost();
     var yip=yip2.getHostAddress();
   return yip;
 }//end myIP
@@ -139,6 +140,3 @@ var query = connection.query(post, function(err, result) {
 //console.log(query.sql);
 console.log("worked"); // INSERT INTO posts SET `id` = 1, `title` = 'Hello MySQL'
 */
-
-
-

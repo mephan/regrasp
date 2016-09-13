@@ -1,79 +1,79 @@
 html
-  head
-    title=title
-    link(href='/css/style.css', rel='stylesheet')
-    link(href='/css/circle.css', rel='stylesheet')
-    script(src='/socket.io/socket.io.js')
-    script(src='/js/task.js')
-    //script(src='/js/jquery-3.1.0.min.js')
-    //script(src='/js/jquery.mobile-1.4.5.min.js')
-    script(src='http://code.jquery.com/jquery-1.11.3.min.js')
-    script(src='http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js')  
-    script(type='text/javascript')
-    body(margin="auto")
-      div.tabletLayout
-        div#pretask 
-          div#garden
-            div#story
-              span#storyText Hey
-            div#flowers
-              div.flower
-                img#flower1(src="../img/icons-all/flower1.svg")
-              div.flower
-                img#flower2(src="../img/icons-all/flower2.svg")
-              div.flower
-                img#flower3(src="../img/icons-all/flower2.svg")
-              div.flower
-                img#flower4(src="../img/icons-all/flower2.svg")
-              div.flower
-              img#flower5(src="../img/icons-all/flower2.svg")
-          div#key
-            img#image(src="../img/icons-all/key-22.png")
-          div#centeredPatient
-            div#objectSetup
-              div.centered
-                span#SetupText You will be using the highlighted object(s) in the upcoming task
-                object#objectsUsed(data="../img/icons-all/objects.svg" ftype="image/svg+xml")
-                span Remove any other objects that are on the mat and put them away.
-            div#firstDiagram
-              div.centered
-                span#firstDiagramText Place the object(s) in on the highlighted area of the mat
-                img#firstSetup(src="../img/icons-all/diagrams-start1.png")
-            div#diagram
-              div.centered
-                div#popupBoxOnePosition
-                  div.popupBoxWrapper
-                    div.popupBoxContent
-                      video#videodiag(src="../img/INR-Exercise1.mp4" type="video/mp4" controls="controls")
-                      div.centered
-                        div#exit 
-                          span Press to go back
-                span#exerciseTitle Exercise 1
-                span#diag_wrap
-                img#diagIMG(src="../img/icons-all/diagrams-ex1.png")
-                div
-                  span#video Video Example
-            div#taskArea
-              div.centered
-                span#prep Sit with your back against the chair. Press the green button to continue.
-                div.image       
-                  object#scoreImage(data="../img/icons-all/fullcircle-thirds.svg" ftype="image/svg+xml")  
-                  div.scoreArea
-                    div#repetitions
-                      span#scoreText You have
-                      br
-                      span#count 3
-                      br
-                      more to go!
-                    div#scoreResponse
-                      span#scoreValue Hold on
-                      br
-                      span#resetObjects Score is loading
-          div#start
-            div.centered
-              div.forward
-                img(src="../img/icons-all/forward.png")
-        div#task
-          div#centeredTask
-            div.centered
-              p#tasktext Press the screen before starting the task
+    head
+        title=title
+        link(href='/css/style.css', rel='stylesheet')
+        link(href='/css/circle.css', rel='stylesheet')
+        script(src='/socket.io/socket.io.js')
+        script(src='/js/task.js')
+        //script(src='/js/jquery-3.1.0.min.js')
+        //script(src='/js/jquery.mobile-1.4.5.min.js')
+        script(src='http://code.jquery.com/jquery-1.11.3.min.js')
+        script(src='http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js')
+        script(type='text/javascript')
+        body(margin="auto")
+            div.tabletLayout
+                div#pretask
+                    div#garden
+                        div#story
+                            span#storyText Hey
+                        div#flowers
+                            div.flower
+                                img#flower1(src="../img/icons-all/flower1.svg")
+                            div.flower
+                                img#flower2(src="../img/icons-all/flower2.svg")
+                            div.flower
+                                img#flower3(src="../img/icons-all/flower2.svg")
+                            div.flower
+                                img#flower4(src="../img/icons-all/flower2.svg")
+                            div.flower
+                            img#flower5(src="../img/icons-all/flower2.svg")
+                    div#key
+                        img#image(src="../img/icons-all/key-22.png")
+                    div#centeredPatient
+                        div#objectSetup
+                            div.centered
+                                span#SetupText You will be using the highlighted object(s) in the upcoming activity
+                                object#objectsUsed(data="../img/icons-all/objects.svg" ftype="image/svg+xml")
+                                span Remove any other objects that are on the mat and put them away.
+                        div#firstDiagram
+                            div.centered
+                                span#firstDiagramText Place the object(s) on the highlighted area of the mat
+                                img#firstSetup(src="../img/icons-all/diagrams-start1.png")
+                        div#diagram
+                            div.centered
+                                div#popupBoxOnePosition
+                                    div.popupBoxWrapper
+                                        div.popupBoxContent
+                                            video#videodiag(src="../img/INR-Exercise1.mp4" type="video/mp4" controls="controls")
+                                            div.centered
+                                                div#exit
+                                                    span Press to go back
+                                span#exerciseTitle Exercise 1
+                                span#diag_wrap
+                                img#diagIMG(src="../img/icons-all/diagrams-ex1.png")
+                                div
+                                    span#video Click Here to See a Video Example
+                        div#taskArea
+                            div.centered
+                                span#prep Sit with your back against the chair. Place your right arm in the start position. Press the green button to continue.
+                                div.image
+                                    object#scoreImage(data="../img/icons-all/fullcircle-thirds.svg" ftype="image/svg+xml")
+                                    div.scoreArea
+                                        div#repetitions
+                                            span#scoreText You have
+                                            br
+                                            span#count 3
+                                            br
+                                            more to go!
+                                        div#scoreResponse
+                                            span#scoreValue Hold on
+                                            br
+                                            span#resetObjects Score is loading
+                    div#start
+                        div.centered
+                            div.forward
+                                img(src="../img/icons-all/forward.png")
+                div#task
+                    div#centeredTask
+                        div.centered
+                            p#tasktext Press the screen before starting the activity
