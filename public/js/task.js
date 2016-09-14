@@ -97,6 +97,8 @@ window.onload=function(){
 		taskArea.style.visibility="hidden";
 		document.getElementById("garden").style.display="NONE";
 		document.getElementById("objectsUsed").style.visibility="visible" //CHANGED //ADDED
+		$('#objectsUsed').css('width', '40%');
+		$('#objectsUsed').css('height', '40%');
 	}
 	function taskScreenOn(){
 		console.log("taskScreenOn");
@@ -223,6 +225,7 @@ window.onload=function(){
 		console.log("start.onclick");
 		console.log("");
 		$('#headerContent').text('');
+		$('#noticeContent').text('');
 		//diagram goes to setup
 		if(showGarden){
 			showGarden=false;
@@ -250,10 +253,10 @@ window.onload=function(){
 		}else if(setup){
 			//console.log('second click');
 			if (count == 2 || count == 1) {
-				$('#headerContent').text('Activity 1 Error Instructions');
+				$('#headerContent').text('Activity ' + exercise.toString() +  ' Error Instructions');
 			}
 			else {
-				$('#headerContent').text('Activity 1 Instructions');
+				$('#headerContent').text('Activity ' + exercise.toString() + ' Instructions');
 			}
 			socket.emit("json",taskSetupReq+exercise.toString()+"}");
 			setup=false;
@@ -273,7 +276,7 @@ window.onload=function(){
 			}
 			socket.emit("json",systemReady+exercise.toString()+", \"iteration\" :  " +(4-count).toString()+"}");
 		}else if(repsScreen){
-			$('#headerContent').text('Activity 1 Setup');
+			$('#headerContent').text('Activity ' + exercise.toString() + ' Setup');
 			console.log('reps screen?');
 			var exUsed=exercise;
 			if(exercise==5){
@@ -465,6 +468,9 @@ window.onload=function(){
 		intask.style.color="#59595B";
 		setTimeout(enableEnd,300);
 		document.getElementById("tasktext").innerHTML="Activity running. Press the screen when done";
+		$('#task').css('background-color', 'red');
+		$('#tasktext').css('color', 'black');
+		$('.head').css('background-color', 'red');
 		document.getElementById("centeredTask").style.color="#59595B";
 
 	}
@@ -509,21 +515,22 @@ window.onload=function(){
 		}else if(endReady){
 			//count-=1;
 			// Sets the header for the end screen
-			//$('#headerContent').text('Thank you!');
+			$('#headerContent').text('Thank you!');
 			console.log("GOOD DATA RUN " + goodDataRuns);
+			$('.head').css('background-color', '#97e157');
 			if (count == 4) {//goodDataRuns) {
-				$('#headerContent').text('You will now repeat this activity again.');
+				$('#noticeContent').text('You will now repeat this activity again.');
 			}
 			else if (count == 3) {
-				$('#headerContent').text('You will now repeat this activity with some specific errors. ');
+				$('#noticeContent').text('You will now repeat this activity with some specific errors. ');
 			}
 
 			else if (count == 2) {
-				$('#headerContent').text('You will now repeat this activity with a different error. ');
+				$('#noticeContent').text('You will now repeat this activity with a different error. ');
 			}
 
 			else if (count == 1) {
-				$('#headerContent').text('You will now complete a short survey about this activity. ');
+				$('#noticeContent').text('You will now complete a short survey about this activity. ');
 			}
 			scoreLoadingScreen();
 			resetStartScreen();
