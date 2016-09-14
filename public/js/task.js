@@ -8,7 +8,7 @@ window.onload=function(){
 						]
 	var setupTime=50; // This should be set to 6000 originally but sped up to 50 for testing
 	var maxErrors=5;
-	var errorCount=0;
+	var error=0;
 	var scoreTime=50; // Same deal as above.
 	var checkForErrors=false;
 	var startTask="{\"type\" : \"startTask\", \"task\" : ";
@@ -26,7 +26,7 @@ window.onload=function(){
 	var popup=document.getElementById("popupBoxOnePosition");
 	var socket=io();
 	var scores=[];
-	var count=2; //changed to 2 instead of 3
+	var count=4; //changed to 2 instead of 3
 	var total=2;
 	var checkForErrors=false;
 	var showGarden=false;
@@ -36,7 +36,7 @@ window.onload=function(){
 	var rep=3-count;
 	var exercise=1;
 	var diagramOn=true;
-	document.getElementById("count").innerHTML=total;
+	//document.getElementById("count").innerHTML=total;
 	var gotScore=false;
 	var start=false;
 	var scorewaiting=false;
@@ -170,7 +170,7 @@ window.onload=function(){
 				document.getElementById("start").style.display="";
 				document.getElementById("firstDiagramText").innerHTML="Set up your object(s) and hand";
 				document.getElementById("firstSetup").style.display="block";
-				document.getElementById("firstSetup").src="../img/icons-all/diagrams-start"+exercise.toString()+".png";
+				document.getElementById("firstSetup").src="../img/startingpos/diagrams-start"+exercise.toString()+".png";
 				diagramLayout=true;
 				firstDiagram.style.width="85%";
 			}else{
@@ -222,28 +222,39 @@ window.onload=function(){
 	document.getElementById("start").onclick=function(){
 		console.log("start.onclick");
 		console.log("");
+		$('#headerContent').text('');
 		//diagram goes to setup
 		if(showGarden){
 			showGarden=false;
 			createGarden();
 
 		}else if(diagramLayout){
+			//console.log("NOW");
 			systemSetup();
 			diagramLayout=false;
 		}
 		else if(diagramOn){
+			console.log('diagram on screen');
 			$("#scoreResponse").css('visibility', 'hidden');
+			$('#headerContent').text('');
 			diagramOn=false;
 			objectSetup.style.visibility="hidden";
 			firstDiagram.style.visibility="visible";
 			document.getElementById("SetupText").innerHTML="You will be using the highlighted object(s) in the upcoming task";
 			document.getElementById("objectsUsed").style.visibility="hidden";
-			document.getElementById("firstSetup").src="../img/icons-all/diagrams-start"+exercise.toString()+".png";
+			document.getElementById("firstSetup").src="../img/startingpos/diagrams-start"+exercise.toString()+".png";
 			//need to request setup here
 			setup=true;
 
 			//taskReady=false;
 		}else if(setup){
+			//console.log('second click');
+			if (count == 2 || count == 1) {
+				$('#headerContent').text('Activity 1 Error Instructions');
+			}
+			else {
+				$('#headerContent').text('Activity 1 Instructions');
+			}
 			socket.emit("json",taskSetupReq+exercise.toString()+"}");
 			setup=false;
 			showLoading();
@@ -254,6 +265,7 @@ window.onload=function(){
 			setTimeout(setUpTimeOut,setupTime);
 		}
 		else if(!taskReady){
+			console.log('task is ready');
 			taskReady=true;
 			taskScreenOn();
 			if(count==total){
@@ -261,24 +273,30 @@ window.onload=function(){
 			}
 			socket.emit("json",systemReady+exercise.toString()+", \"iteration\" :  " +(4-count).toString()+"}");
 		}else if(repsScreen){
+			$('#headerContent').text('Activity 1 Setup');
+			console.log('reps screen?');
 			var exUsed=exercise;
 			if(exercise==5){
 				exUsed=1;
 			}
 			socket.emit("json",taskDone+exUsed.toString()+", \"iteration\" :  " +(4-count).toString()+"}");
-					document.getElementById("resetObjects").innerHTML="Score is loading.";
+		//			document.getElementById("resetObjects").innerHTML="Score is loading.";
 			document.getElementById("centeredPatient").style.width="85%";
 			document.getElementById("taskArea").style.width="85%";
 			document.getElementById("key").style.display="none";
 			document.getElementById("image").style.display="none";
-			if(exercise<=4){
+			// This should allow for 12 exercises with 2 good runs and two error runs.
+			if(exercise<=12){
+				//console.log("EXERCISE " + exercise);
 				repsScreen=false;
 				diagramOn=true;
+				// This is where the total is determined...
 				if(count==total){
 					clearCircles();
 				}
 				showObjectSetup();
 			}else{
+				console.log("FINISHED?");
 				window.location.href="/thankyou";
 			}
 
@@ -301,51 +319,66 @@ window.onload=function(){
 	function updateVideo(){
 		console.log("updateVideo");
 		var video = document.getElementById('videodiag');
-		video.setAttribute("src","../img/INR-Exercise"+exercise.toString()+".mp4");
+		video.setAttribute("src","../img/movies/INR-Exercise"+exercise.toString()+".MOV");
 	}
 	function updateCountScreen(){
 		console.log("updateCountScreen");
-		if(count>0){
-			document.getElementById("resetObjects").innerHTML="Reset your objects.";
-		}else{
-			done=true;
-			count=total;
-			// Do not change images or videos until you have done the exercise twice good and twice poorly.
-			if (!goodDataRuns) {
-			showGarden=true;
-			highlightObject();
-			updateVideo();
-			document.getElementById("diagIMG").src="../img/icons-all/diagrams-ex"+exercise.toString()+ ".png";
-			document.getElementById("exerciseTitle").innerHTML="Exercise "+exercise.toString();
-			//showGarden=true;
-			document.getElementById("resetObjects").innerHTML="Task is done.";
-			// increment exercise only after two good runs and two bad runs.
-			exercise+=1;
-			}
+		console.log("LAUNCHED");
+		count--;
+		console.log("EXERCISE " + exercise);
+		console.log("COUNT " + count);
+		if (count <= 2) {
 			goodDataRuns = false;
 		}
-		document.getElementById("count").innerHTML=count;
+		if(count>0){
+			goodDataRuns = true;
+
+			//document.getElementById("resetObjects").innerHTML="Reset your objects.";
+		}else{
+			exercise+=1;
+			done=true;
+			// Do not change images or videos until you have done the exercise twice good and twice poorly.
+			//if (!goodDataRuns) {
+			showGarden=false;
+			highlightObject();
+			updateVideo();
+			console.log("SWITCHING");
+			document.getElementById("diagIMG").src="../img/instructions/diagrams-ex"+exercise.toString()+ ".png";
+			document.getElementById("exerciseTitle").innerHTML="Exercise "+exercise.toString();
+			//showGarden=true;
+			//document.getElementById("resetObjects").innerHTML="Task is done.";
+			// increment exercise only after two good runs and two bad runs.
+			goodDataRuns = true;
+			//}
+			//else {
+			//	goodDataRuns = false;
+			//}
+			//count=2;
+			//count --;
+			count = 4;
+		}
+		//document.getElementById("count").innerHTML=count;
 	}
 	function clearCircles(){
 		console.log("clearCircles");
 		var svgfile=document.getElementById("scoreImage");
-		var svgContent=svgfile.contentDocument;
+/*		var svgContent=svgfile.contentDocument;
 		for( i=1;i<=total;i++){
 			var cirID="circle"+i.toString();
 			svgContent.getElementById(cirID).style.fill="#ffffff";
-		}
+		}*/
 	}
 	function updateCurrentScore(score){
 		console.log("updateCurrentScore");
 		scores.push(score);
 		var svgfile=document.getElementById("scoreImage");
-		var svgContent=svgfile.contentDocument;
+	//	var svgContent=svgfile.contentDocument;
 		var cirID="circle"+rep.toString();
 		var hexResp=scoreToValues(score);
 		var hex=hexResp.hex;
 		var response=hexResp.response;
-		svgContent.getElementById(cirID).style.fill=hex;
-		document.getElementById("scoreValue").innerHTML=response;
+	//	svgContent.getElementById(cirID).style.fill=hex;
+	//	document.getElementById("scoreValue").innerHTML=response;
 		updateCountScreen();
 		repsScreen=true;
 	}
@@ -408,9 +441,9 @@ window.onload=function(){
 					showDiagram();
 					document.getElementById("objectsUsed").style.visibility="hidden"; //CHANGED //This is a hack, but roll with it for now
 					document.getElementById("start").style.display="";
-					document.getElementById("firstDiagramText").innerHTML="Place the object(s) in on the highlighted area of the mat";
+					$('#headerContent').set("Place the object(s) on the highlighted area of the mat");//JKLFDNJFKLDSFJDSKLFNJSDKLFJLDSKFNJDSLFNSDKF
 					document.getElementById("firstSetup").style.display="block";
-					document.getElementById("firstSetup").src="../img/icons-all/diagrams-start"+exercise.toString()+".png";
+					document.getElementById("firstSetup").src="../img/startingpos/diagrams-start"+exercise.toString()+".png";
 					diagramLayout=true;
 					firstDiagram.style.width="85%";
 					errorCount=0;
@@ -444,14 +477,14 @@ window.onload=function(){
 		$("#scoreResponse").css('visibility', 'visible');
 		//$("#scoreResponse").css('position', 'fixed');
 		//$("#scoreResponse").css('left', '50%');
-		document.getElementById("scoreValue").innerHTML="Hold on";
+		//document.getElementById("scoreValue").innerHTML="Hold on";
 		//document.getElementById("scoreValue").style.left="30%"; //CHANGED //Try this
-		document.getElementById("resetObjects").innerHTML="Score is loading.";
-		document.getElementById("centeredPatient").style.width="65%";
-		document.getElementById("taskArea").style.width="65%";
-		document.getElementById("key").style.display="block";
-		document.getElementById("image").style.display="block";
-		$("#scoreImage").css('visibility', 'hidden'); //CHANGED //Gets rid of the scoring circle
+		//document.getElementById("resetObjects").innerHTML="Score is loading.";
+		//document.getElementById("centeredPatient").style.width="65%";
+		//document.getElementById("taskArea").style.width="65%";
+		//document.getElementById("key").style.display="block";
+		//document.getElementById("image").style.display="block";
+		//$("#scoreImage").css('visibility', 'hidden'); //CHANGED //Gets rid of the scoring circle
 		intask.style.backgroundColor='#97e157';
 		intask.style.zIndex="9";
 		pretask.style.visibility="visible";
@@ -474,7 +507,24 @@ window.onload=function(){
 			socket.emit("json",startTask+exercise.toString()+"}");
 			endScreenOn();
 		}else if(endReady){
-			count-=1;
+			//count-=1;
+			// Sets the header for the end screen
+			//$('#headerContent').text('Thank you!');
+			console.log("GOOD DATA RUN " + goodDataRuns);
+			if (count == 4) {//goodDataRuns) {
+				$('#headerContent').text('You will now repeat this activity again.');
+			}
+			else if (count == 3) {
+				$('#headerContent').text('You will now repeat this activity with some specific errors. ');
+			}
+
+			else if (count == 2) {
+				$('#headerContent').text('You will now repeat this activity with a different error. ');
+			}
+
+			else if (count == 1) {
+				$('#headerContent').text('You will now complete a short survey about this activity. ');
+			}
 			scoreLoadingScreen();
 			resetStartScreen();
 			gotScore=false;
@@ -489,6 +539,9 @@ window.onload=function(){
 		video.currentTime=0;
 		video.play();
 		popup.style.display="block";
+		//$('#video').load('/survey');
+		//location.replace('/survey');
+		//$(document.doumentElement).html('http://172.30.138.197:3000/survey');
 	})
 
 	//document.getElementById("exit").onclick=function(){

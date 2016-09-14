@@ -4,6 +4,23 @@ src: url("/fonts/montserrat/Montserrat-Bold.ttf");
 font-weight: bold;
 font-style: normal;
 }
+.head{
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 50px;
+	width: 100%;
+	background-color: #97e157;
+	z-index: 999;
+}
+
+#headerContent{
+	position: fixed;
+	left: 35%;
+	font-size: 28px;
+	font-weight: 700;
+	top: -2%;
+}
 
 html{
 background-color:  #c0c0c0;
@@ -21,6 +38,7 @@ margin-bottom:auto;
 text-align: center;
 height:100%;
 position:absolute;
+top: 7%;
 z-index:12;
 visibility:visible;
 float:left;

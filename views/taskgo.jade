@@ -5,11 +5,11 @@ html
         link(href='/css/circle.css', rel='stylesheet')
         script(src='/socket.io/socket.io.js')
         script(src='/js/task.js')
-        //script(src='/js/jquery-3.1.0.min.js')
-        //script(src='/js/jquery.mobile-1.4.5.min.js')
         script(src='http://code.jquery.com/jquery-1.11.3.min.js')
         script(src='http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js')
         script(type='text/javascript')
+        div.head
+            p#headerContent Activity 1 setup
         body(margin="auto")
             div.tabletLayout
                 div#pretask
@@ -38,37 +38,25 @@ html
                         div#firstDiagram
                             div.centered
                                 span#firstDiagramText Place the object(s) on the highlighted area of the mat
-                                img#firstSetup(src="../img/icons-all/diagrams-start1.png")
+                                img#firstSetup(src="../img/startingpos/diagrams-start1.png")
                         div#diagram
                             div.centered
                                 div#popupBoxOnePosition
                                     div.popupBoxWrapper
                                         div.popupBoxContent
-                                            video#videodiag(src="../img/INR-Exercise1.mp4" type="video/mp4" controls="controls")
+                                            video#videodiag(src="../img/movies/INR-Exercise1.MOV" type="video/mp4" controls="controls")
                                             div.centered
                                                 div#exit
                                                     span Press to go back
                                 span#exerciseTitle Exercise 1
                                 span#diag_wrap
-                                img#diagIMG(src="../img/icons-all/diagrams-ex1.png")
+                                img#diagIMG(src="../img/instructions/diagrams-ex1.png")
                                 div
                                     span#video Click Here to See a Video Example
                         div#taskArea
                             div.centered
                                 span#prep Sit with your back against the chair. Place your right arm in the start position. Press the green button to continue.
-                                div.image
-                                    object#scoreImage(data="../img/icons-all/fullcircle-thirds.svg" ftype="image/svg+xml")
-                                    div.scoreArea
-                                        div#repetitions
-                                            span#scoreText You have
-                                            br
-                                            span#count 3
-                                            br
-                                            more to go!
-                                        div#scoreResponse
-                                            span#scoreValue Hold on
-                                            br
-                                            span#resetObjects Score is loading
+
                     div#start
                         div.centered
                             div.forward
