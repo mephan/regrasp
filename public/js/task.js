@@ -43,10 +43,9 @@ window.onload=function(){
 	if (userNum === null) {
 		userNum = 1;
 	}
-//	var exercise=localStorage.getItem(exercise);//1;
+// Accesses session storage to maintain variables
 var exercise = sessionStorage.getItem("exercise");
-//localStorage.clear();
-//var exercise = 1;
+//var exercise = 5;
 	if (exercise === null){
 		exercise = 1;
 	}
