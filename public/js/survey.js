@@ -110,7 +110,6 @@ $('#questionThree').append(choices[2]);
 // tapping on any of the options records what was selected and
 // proceeds to question two.
 $('.questionDivs').on("tap", function() {
-  socket.emit("THIS IS STARTING");
   if (clickOne == 1) {
 console.log(event.target.id);
 var output = $('#'+event.target.id).text();
