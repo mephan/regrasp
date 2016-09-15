@@ -1,0 +1,33 @@
+.questionDivs{
+  width: 40%;
+  border: solid black 2px;
+  text-align: center;
+  font-weight: 700;
+  background-color: rgba(214, 245, 245, 0.7);
+  border-radius: 3px;
+  margin: auto;
+  margin-bottom: 7%;
+}
+
+.surveyMessage{
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+#continue{
+  position:fixed;
+  top: 50%;
+  left: 40%;
+  width: 200px;
+  height:200px;
+  background-color: green;
+  visibility: hidden;
+}
+#done{
+  position:fixed;
+  top: 50%;
+  width: 200px;
+  height:200px;
+  background-color: blue;
+}
