@@ -282,14 +282,14 @@ var exercise = sessionStorage.getItem("exercise");
 			//taskReady=false;
 		}else if(setup){
 			//console.log('second click');
+			$('#diagIMG').css('visibility', 'visible');
 			if (count == 2 || count == 1) {
 				$('#headerContent').text('Activity ' + exercise.toString() +  ' Error Instructions');
 				$('#noticeContent').text(getError(exercise));
 				// May have to reshow this image if I cant get the localstorage working...
-				$('#diagIMG').css('visibility', 'hidden');
+				//$('#diagIMG').css('visibility', 'hidden');
 			}
 			else {
-				$('#diagIMG').css('visibility', 'visible');
 				$('#headerContent').text('Activity ' + exercise.toString() + ' Instructions');
 			}
 			//socket.emit("json",taskSetupReq+exercise.toString()+"}");
@@ -556,7 +556,7 @@ var exercise = sessionStorage.getItem("exercise");
 			// Sets the header for the end screen
 			$('#headerContent').text('Thank you!');
 			console.log("GOOD DATA RUN " + goodDataRuns);
-			$('.head').css('background-color', '#97e157');
+			$('.head').css('background-color', '#c0c0c0');
 			if (count == 4) {//goodDataRuns) {
 				$('#noticeContent').text('You will now repeat this activity again.');
 			}

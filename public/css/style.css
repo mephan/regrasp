@@ -9,7 +9,6 @@ font-style: normal;
 	top: 0;
 	left: 0;
 	height: 50px;
-	width: 85%;
 	background-color: #c0c0c0;
 	z-index: 11;
 }
@@ -22,8 +21,9 @@ font-style: normal;
 }
 #noticeContent{
 	position: fixed;
-	top: 35%;
+	top: 10%;
 	left: 12%;
+	width: 85%;
 	font-size: 40px;
 	font-weight: 700;
 	text-align: center;
