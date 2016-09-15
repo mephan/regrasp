@@ -388,8 +388,11 @@ width:100%;
 height:100%; /* try here */
 }
 #video{
+	position: absolute;
 background-color:#c0c0c0;
-padding:15px;
+padding:8px;
+bottom: 9%;
+left: 5%;
 }
 #videodiag{
 width: 100%;

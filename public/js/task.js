@@ -34,7 +34,20 @@ window.onload=function(){
 	var scoretimedout=false;
 	var endReady=false;
 	var rep=3-count;
-	var exercise=1;
+	// Reload last loaded index for error values
+	var index = sessionStorage.getItem("index");
+	if (index === null) {
+		index = 0;
+	}
+
+//	var exercise=localStorage.getItem(exercise);//1;
+var exercise = sessionStorage.getItem("exercise");
+//localStorage.clear();
+//var exercise = 1;
+	if (exercise === null){
+		exercise = 1;
+	}
+//	var exercise = 1;
 	var diagramOn=true;
 	//document.getElementById("count").innerHTML=total;
 	var gotScore=false;
@@ -54,6 +67,7 @@ window.onload=function(){
 	var setup=false;
 	highlightObject();
 	var attempt=0;
+
 
 	function systemSetup(){
 		console.log("systemSetup");
@@ -82,12 +96,16 @@ window.onload=function(){
 
 	function showDiagram(){
 		console.log("showDiagram");
+		if (count > 2) {
+			$('#video').css('visibility', 'visible');
+		}
 		diagScreen.style.visibility="visible";
 		firstDiagram.style.visibility="hidden";
 		document.getElementById("objectsUsed").style.visibility="hidden" //CHANGED //This is a hack, but roll with it for now
 	}
 	function hideDiagram(){
 		console.log("hideDiagram");
+		$('#video').css('visibility', 'hidden');
 		diagScreen.style.visibility="hidden";
 		taskArea.style.visibility="visible";
 	}
@@ -108,6 +126,7 @@ window.onload=function(){
 	}
 	function showReps(){
 		console.log("showReps");
+		$('#diagIMG').css('visibility', 'hidden');
 		$("#scoreImage").css('visibility', 'visible');
 		$("#scoreImage").css('position', 'fixed');
 		$("#scoreImage").css('left', '6%');
@@ -134,6 +153,7 @@ window.onload=function(){
 		taskArea.style.visibility="visible";
 	}
 	function highlightObject(){
+		$('#headerContent').text('Activity ' + exercise + ' setup');
 		console.log("highlightObject");
 		while(lastObjects.length>0){
 			var lastObj=lastObjects.pop();
@@ -238,6 +258,8 @@ window.onload=function(){
 		}
 		else if(diagramOn){
 			console.log('diagram on screen');
+			updateVideo();
+			document.getElementById("diagIMG").src="../img/instructions/diagrams-ex"+exercise.toString()+ ".png";
 			$("#scoreResponse").css('visibility', 'hidden');
 			$('#headerContent').text('');
 			diagramOn=false;
@@ -254,8 +276,12 @@ window.onload=function(){
 			//console.log('second click');
 			if (count == 2 || count == 1) {
 				$('#headerContent').text('Activity ' + exercise.toString() +  ' Error Instructions');
+				$('#noticeContent').text(getError(exercise));
+				// May have to reshow this image if I cant get the localstorage working...
+				$('#diagIMG').css('visibility', 'hidden');
 			}
 			else {
+				$('#diagIMG').css('visibility', 'visible');
 				$('#headerContent').text('Activity ' + exercise.toString() + ' Instructions');
 			}
 			socket.emit("json",taskSetupReq+exercise.toString()+"}");
@@ -338,7 +364,8 @@ window.onload=function(){
 
 			//document.getElementById("resetObjects").innerHTML="Reset your objects.";
 		}else{
-			exercise+=1;
+			//localStorage.clear();
+			//exercise++;
 			done=true;
 			// Do not change images or videos until you have done the exercise twice good and twice poorly.
 			//if (!goodDataRuns) {
@@ -346,12 +373,13 @@ window.onload=function(){
 			highlightObject();
 			updateVideo();
 			console.log("SWITCHING");
-			document.getElementById("diagIMG").src="../img/instructions/diagrams-ex"+exercise.toString()+ ".png";
-			document.getElementById("exerciseTitle").innerHTML="Exercise "+exercise.toString();
+			//document.getElementById("diagIMG").src="../img/instructions/diagrams-ex"+exercise.toString()+ ".png";
+			//document.getElementById("exerciseTitle").innerHTML="Exercise "+exercise.toString();
 			//showGarden=true;
 			//document.getElementById("resetObjects").innerHTML="Task is done.";
 			// increment exercise only after two good runs and two bad runs.
 			goodDataRuns = true;
+			console.log("EXERCISE " + exercise);
 			//}
 			//else {
 			//	goodDataRuns = false;
@@ -531,6 +559,11 @@ window.onload=function(){
 
 			else if (count == 1) {
 				$('#noticeContent').text('You will now complete a short survey about this activity. ');
+				exercise++;
+				sessionStorage.setItem("exercise", exercise.toString());
+				sessionStorage.setItem("index", index.toString());
+				setTimeout(function(){
+				location.replace('/survey');}, 2000);
 			}
 			scoreLoadingScreen();
 			resetStartScreen();
@@ -546,6 +579,7 @@ window.onload=function(){
 		video.currentTime=0;
 		video.play();
 		popup.style.display="block";
+		$('#video').css('visibility', 'hidden');
 		//$('#video').load('/survey');
 		//location.replace('/survey');
 		//$(document.doumentElement).html('http://172.30.138.197:3000/survey');
@@ -553,9 +587,32 @@ window.onload=function(){
 
 	//document.getElementById("exit").onclick=function(){
 	$( '#exit' ).on("tap", function() {
+		$('#video').css('visibility', 'visible');
 		console.log("exit.onclick");
 		console.log("");
 		popup.style.display="none";
 	})
+
+
+function getError() {
+	var er = [2, 1, 4, 2, 3, 5, 6, 5, 3, 4, 2, 4, 5, 4, 3, 3, 2, 5, 3, 3, 5, 2, 6, 5];
+	var num = er[index];
+	index++;
+
+	switch (num){
+		case 1:
+				return "Do the entire activity slowly";
+		case 2:
+				return "Use an indirect path to reach towards or move the object(s)";
+		case 3:
+				return "Drop an object during the activity";
+		case 4:
+				return "Put the object(s) in the incorrect place during the activity";
+		case 5:
+				return "Do not fully complete the activity";
+		case 6:
+				return "Lean forward in your chair during the activity";
+	}
+}
 
 }
