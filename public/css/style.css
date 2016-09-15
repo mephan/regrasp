@@ -31,6 +31,9 @@ font-style: normal;
 	font-family:"Monserat";
 	z-index: 999;
 }
+span{
+	font-size: 36px;
+}
 #headerContent{
 	position: fixed;
 	left: 35%;

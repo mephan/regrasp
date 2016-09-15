@@ -62,10 +62,10 @@ var exercise = sessionStorage.getItem("exercise");
 	var diagramLayout=false;
 	var svg=document.getElementById("objectsUsed");
 	var svgCont=svg.contentDocument;
-	var objects=svgCont.getElementsByClassName("ex1");
+//	var objects=svgCont.getElementsByClassName("ex1");
 	var lastObjects=[];
 	var goodDataRuns = true;
-	lastObjects.push(objects[0]);
+	//lastObjects.push(objects[0]);
 	var setup=false;
 	highlightObject();
 	var attempt=0;
@@ -116,8 +116,9 @@ var exercise = sessionStorage.getItem("exercise");
 		taskArea.style.visibility="hidden";
 		document.getElementById("garden").style.display="NONE";
 		document.getElementById("objectsUsed").style.visibility="visible" //CHANGED //ADDED
+		document.getElementById("objectsUsed").src="../img/empty/Ex"+exercise.toString()+".png";
 		$('#objectsUsed').css('width', '40%');
-		$('#objectsUsed').css('height', '40%');
+		$('#objectsUsed').css('height', '25%');
 	}
 	function taskScreenOn(){
 		console.log("taskScreenOn");
@@ -157,6 +158,9 @@ var exercise = sessionStorage.getItem("exercise");
 		if (exercise == 13) {
 			location.replace('/thankyou');
 		}
+		document.getElementById("objectsUsed").src="../img/empty/Ex"+exercise.toString()+".png";
+		$('#objectsUsed').css("width", "40%");
+		$('#objectsUsed').css("height", "25%");
 		$('#headerContent').text('Activity ' + exercise + ' setup');
 		console.log("highlightObject");
 		while(lastObjects.length>0){
@@ -165,8 +169,8 @@ var exercise = sessionStorage.getItem("exercise");
 		}
 		var svgfile=document.getElementById("objectsUsed");
 		var svgContent=svgfile.contentDocument;
-		var objects=svgContent.getElementsByClassName("ex"+exercise.toString());
-		for(var i=0;i<objects.length;i++){
+	//	var objects=svgContent.getElementsByClassName("ex"+exercise.toString());
+	/*	for(var i=0;i<objects.length;i++){
 			var id=objects[i].id;
 			var fill=""
 			if(id=="blue")
@@ -178,7 +182,7 @@ var exercise = sessionStorage.getItem("exercise");
 			}
 			objects[i].style.fill=fill;
 			lastObjects.push(objects[i]);
-		}
+		}*/
 
 	}
 	function setUpTimeOut(){
