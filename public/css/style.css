@@ -9,9 +9,9 @@ font-style: normal;
 	top: 0;
 	left: 0;
 	height: 50px;
-	width: 100%;
-	background-color: #97e157;
-	z-index: 999;
+	width: 85%;
+	background-color: #c0c0c0;
+	z-index: 11;
 }
 
 .notice{
@@ -27,6 +27,8 @@ font-style: normal;
 	font-size: 40px;
 	font-weight: 700;
 	text-align: center;
+	color: #59595B;
+	font-family:"Monserat";
 	z-index: 999;
 }
 #headerContent{
@@ -35,6 +37,8 @@ font-style: normal;
 	font-size: 28px;
 	font-weight: 700;
 	top: -2%;
+	color: #59595B;
+	font-family:"Monserat";
 }
 
 html{
@@ -215,6 +219,7 @@ margin-bottom:auto;
 text-align:center;
 display:table;
 color:white;
+z-index: 101;
 }
 
 #start{

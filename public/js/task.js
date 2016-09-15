@@ -39,7 +39,10 @@ window.onload=function(){
 	if (index === null) {
 		index = 0;
 	}
-
+	var userNum = sessionStorage.getItem("userNum");
+	if (userNum === null) {
+		userNum = 1;
+	}
 //	var exercise=localStorage.getItem(exercise);//1;
 var exercise = sessionStorage.getItem("exercise");
 //localStorage.clear();
@@ -67,7 +70,6 @@ var exercise = sessionStorage.getItem("exercise");
 	var setup=false;
 	highlightObject();
 	var attempt=0;
-
 
 	function systemSetup(){
 		console.log("systemSetup");
@@ -153,6 +155,9 @@ var exercise = sessionStorage.getItem("exercise");
 		taskArea.style.visibility="visible";
 	}
 	function highlightObject(){
+		if (exercise == 13) {
+			location.replace('/thankyou');
+		}
 		$('#headerContent').text('Activity ' + exercise + ' setup');
 		console.log("highlightObject");
 		while(lastObjects.length>0){
@@ -196,7 +201,7 @@ var exercise = sessionStorage.getItem("exercise");
 				diagramLayout=true;
 				firstDiagram.style.width="85%";
 			}else{
-				socket.emit("json",taskSetupReq+exercise.toString()+"}");
+				//socket.emit("json",taskSetupReq+exercise.toString()+"}");
 			}
 		}
 	}
@@ -284,7 +289,7 @@ var exercise = sessionStorage.getItem("exercise");
 				$('#diagIMG').css('visibility', 'visible');
 				$('#headerContent').text('Activity ' + exercise.toString() + ' Instructions');
 			}
-			socket.emit("json",taskSetupReq+exercise.toString()+"}");
+			//socket.emit("json",taskSetupReq+exercise.toString()+"}");
 			setup=false;
 			showLoading();
 			checkForErrors=true;
@@ -300,7 +305,7 @@ var exercise = sessionStorage.getItem("exercise");
 			if(count==total){
 				//clearCircles();
 			}
-			socket.emit("json",systemReady+exercise.toString()+", \"iteration\" :  " +(4-count).toString()+"}");
+			//socket.emit("json",systemReady+exercise.toString()+", \"iteration\" :  " +(4-count).toString()+"}");
 		}else if(repsScreen){
 			$('#headerContent').text('Activity ' + exercise.toString() + ' Setup');
 			console.log('reps screen?');
@@ -308,7 +313,7 @@ var exercise = sessionStorage.getItem("exercise");
 			if(exercise==5){
 				exUsed=1;
 			}
-			socket.emit("json",taskDone+exUsed.toString()+", \"iteration\" :  " +(4-count).toString()+"}");
+			//socket.emit("json",taskDone+exUsed.toString()+", \"iteration\" :  " +(4-count).toString()+"}");
 		//			document.getElementById("resetObjects").innerHTML="Score is loading.";
 			document.getElementById("centeredPatient").style.width="85%";
 			document.getElementById("taskArea").style.width="85%";
@@ -325,6 +330,8 @@ var exercise = sessionStorage.getItem("exercise");
 				}
 				showObjectSetup();
 			}else{
+				userNum++;
+				sessionStorage.setItem("userNum", userNum);
 				console.log("FINISHED?");
 				window.location.href="/thankyou";
 			}
@@ -528,7 +535,8 @@ var exercise = sessionStorage.getItem("exercise");
 
 	function resetStartScreen(){
 		console.log("resetStartScreen");
-		document.getElementById("tasktext").innerHTML="Press the screen before starting the task";
+		$('#tasktext').css('color', 'white');
+		document.getElementById("tasktext").innerHTML="Press the screen before starting the activity";
 		intask.style.backgroundColor="#97e157";
 		document.getElementById("centeredTask").style.color="#FFFFFF";
 		start=false;
@@ -538,7 +546,7 @@ var exercise = sessionStorage.getItem("exercise");
 		console.log("task.onclick");
 		console.log("");
 		if(!start){
-			socket.emit("json",startTask+exercise.toString()+"}");
+			//socket.emit("json",startTask+exercise.toString()+"}");
 			endScreenOn();
 		}else if(endReady){
 			//count-=1;
@@ -568,7 +576,7 @@ var exercise = sessionStorage.getItem("exercise");
 			scoreLoadingScreen();
 			resetStartScreen();
 			gotScore=false;
-			socket.emit("json",endTask);
+			//socket.emit("json",endTask);
 		}
 	}
 	//document.getElementById("video").onclick=function(){
@@ -595,7 +603,27 @@ var exercise = sessionStorage.getItem("exercise");
 
 
 function getError() {
-	var er = [2, 1, 4, 2, 3, 5, 6, 5, 3, 4, 2, 4, 5, 4, 3, 3, 2, 5, 3, 3, 5, 2, 6, 5];
+	var er;
+	switch (userNum) {
+		case 1:
+			er = [2, 1, 4, 2, 3, 5, 6, 5, 3, 4, 2, 4, 5, 4, 3, 3, 2, 5, 3, 3, 5, 2, 6, 5];
+			break;
+		case 2:
+			er = [6,6,4,5,6,4,4,4,6,6,2,2,2,5,2,6,5,2,6,6,6,4,4,2];
+			break;
+		case 3:
+			er = [4,4,1,4,2,4,1,2,4,2,4,3,1,6,4,4,5,5,6,4,1,3,5,2];
+			break;
+		case 4:
+			er = [2,6,5,2,6,1,3,3,3,1,3,4,6,2,3,2,2,2,1,3,2,6,4,6];
+			break;
+		case 5:
+			er = [6,4,1,6,4,6,3,4,1,6,4,1,5,3,1,2,2,2,5,5,4,4,4,6];
+			break;
+		case 6:
+			er = [4,4,6,4,3,6,3,4,5,5,2,1,2,6,4,3,5,4,4,1,3,4,3,3];
+			break;
+	}
 	var num = er[index];
 	index++;
 

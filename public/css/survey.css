@@ -7,6 +7,12 @@
   border-radius: 3px;
   margin: auto;
   margin-bottom: 7%;
+
+}
+
+p{
+  color: #59595B;
+	font-family:"Monserat";
 }
 
 .surveyMessage{
