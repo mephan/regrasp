@@ -335,6 +335,8 @@ var exercise = sessionStorage.getItem("exercise");
 			}else{
 				sessionStorage.setItem("exercise", "1");
 				userNum++;
+				index = 0;
+				sessionStorage.setItem("index", index);
 				sessionStorage.setItem("userNum", userNum.toString());
 				console.log("FINISHED?");
 				window.location.href="/thankyou";
