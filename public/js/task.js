@@ -285,7 +285,7 @@ var exercise = sessionStorage.getItem("exercise");
 			$('#diagIMG').css('visibility', 'visible');
 			if (count == 2 || count == 1) {
 				$('#headerContent').text('Activity ' + exercise.toString() +  ' Error Instructions');
-				$('#noticeContent').text(getError(exercise));
+				$('#noticeContent').text("Please listen to be instructed for induced errors");//getError(exercise));
 				// May have to reshow this image if I cant get the localstorage working...
 				//$('#diagIMG').css('visibility', 'hidden');
 			}
