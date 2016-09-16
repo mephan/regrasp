@@ -336,7 +336,7 @@ var exercise = sessionStorage.getItem("exercise");
 				sessionStorage.setItem("exercise", "1");
 				userNum++;
 				index = 0;
-				sessionStorage.setItem("index", index);
+				sessionStorage.setItem("index", index.toString());
 				sessionStorage.setItem("userNum", userNum.toString());
 				console.log("FINISHED?");
 				window.location.href="/thankyou";
@@ -630,7 +630,7 @@ function getError() {
 			er = [2,6,5,5,6,2,2,4,5,6,3,1,1,3,5,2,5,4,1,5,6,3,6,1];
 			break;
 	}
-	var num = er[index];
+	var num = er[parseInt(index)];
 	index++;
 
 	switch (num){
