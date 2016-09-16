@@ -112,8 +112,6 @@ switch (exerciseNum) {
     ,"Use a remote control"];
     break;
   case 12:
-    userNum++;
-    sessionStorage.setItem("userNum", userNum);
     firstWrite = "true";
     sessionStorage.setItem("firstWrite", firstWrite);
     choices = ["Folding a towel"
@@ -229,6 +227,9 @@ $(document).on("tap", function() {
     exerciseNum++;
     sessionStorage.setItem("exerciseNum", exerciseNum.toString());
     if (exerciseNum == 13) {
+      userNum++;
+      sessionStorage.setItem("userNum", userNum);
+      sessionStorage.setItem("exerciseNum", "1");
       setTimeout(function(){
       location.replace('/thankyou');}, 3000);
     }
@@ -251,6 +252,12 @@ $('#continue').on("tap", function() {
 
 $('#done').on("tap", function(){
   //history.go(-1);
-  location.href = '/taskgo';
+  if (exerciseNum == 12) {
+
+    location.href = '/thankyou';
+  }
+  else {
+    location.href = '/taskgo';
+  }
 });
 })

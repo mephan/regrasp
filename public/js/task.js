@@ -45,8 +45,8 @@ window.onload=function(){
 	}
 // Accesses session storage to maintain variables
 var exercise = sessionStorage.getItem("exercise");
-//var exercise = 5;
-	if (exercise === null){
+//var exercise = 12;
+	if (exercise === null || parseInt(exercise) > 12){
 		exercise = 1;
 	}
 //	var exercise = 1;
@@ -155,9 +155,9 @@ var exercise = sessionStorage.getItem("exercise");
 		taskArea.style.visibility="visible";
 	}
 	function highlightObject(){
-		if (exercise == 13) {
-			location.replace('/thankyou');
-		}
+		//if (exercise == 13) {
+		//	location.replace('/thankyou');
+		//}
 		document.getElementById("objectsUsed").src="../img/empty/Ex"+exercise.toString()+".png";
 		$('#objectsUsed').css("width", "40%");
 		$('#objectsUsed').css("height", "25%");
@@ -333,8 +333,9 @@ var exercise = sessionStorage.getItem("exercise");
 				}
 				showObjectSetup();
 			}else{
+				sessionStorage.setItem("exercise", "1");
 				userNum++;
-				sessionStorage.setItem("userNum", userNum);
+				sessionStorage.setItem("userNum", userNum.toString());
 				console.log("FINISHED?");
 				window.location.href="/thankyou";
 			}
@@ -607,24 +608,24 @@ var exercise = sessionStorage.getItem("exercise");
 
 function getError() {
 	var er;
-	switch (userNum) {
+	switch (parseInt(userNum)) {
 		case 1:
-			er = [2, 1, 4, 2, 3, 5, 6, 5, 3, 4, 2, 4, 5, 4, 3, 3, 2, 5, 3, 3, 5, 2, 6, 5];
+			er = [4,4,6,4,3,6,3,4,5,5,2,1,2,6,4,3,5,4,4,1,3,4,3,3];
 			break;
 		case 2:
-			er = [6,6,4,5,6,4,4,4,6,6,2,2,2,5,2,6,5,2,6,6,6,4,4,2];
+			er = [5,5,5,6,4,6,2,6,1,3,1,5,2,1,2,5,2,2,5,4,6,1,3,4];
 			break;
 		case 3:
-			er = [4,4,1,4,2,4,1,2,4,2,4,3,1,6,4,4,5,5,6,4,1,3,5,2];
+			er = [4,5,1,2,1,6,5,5,1,3,1,3,5,4,5,4,5,6,4,2,4,1,6,1];
 			break;
 		case 4:
-			er = [2,6,5,2,6,1,3,3,3,1,3,4,6,2,3,2,2,2,1,3,2,6,4,6];
+			er = [4,5,4,2,5,1,4,4,2,2,1,1,2,6,1,6,1,6,2,4,6,6,2,4];
 			break;
 		case 5:
-			er = [6,4,1,6,4,6,3,4,1,6,4,1,5,3,1,2,2,2,5,5,4,4,4,6];
+			er = [6,6,1,2,5,1,1,3,6,6,1,4,6,6,6,6,5,1,4,2,5,6,2,6];
 			break;
 		case 6:
-			er = [4,4,6,4,3,6,3,4,5,5,2,1,2,6,4,3,5,4,4,1,3,4,3,3];
+			er = [2,6,5,5,6,2,2,4,5,6,3,1,1,3,5,2,5,4,1,5,6,3,6,1];
 			break;
 	}
 	var num = er[index];
