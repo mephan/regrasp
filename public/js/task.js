@@ -573,6 +573,8 @@ var exercise = sessionStorage.getItem("exercise");
 
 			else if (count == 1) {
 				$('#noticeContent').text('You will now complete a short survey about this activity. ');
+				// Removes the green button to prevent users from skipping the final survey
+				$('#start').css('visibility', 'hidden');
 				exercise++;
 				sessionStorage.setItem("exercise", exercise.toString());
 				sessionStorage.setItem("index", index.toString());
